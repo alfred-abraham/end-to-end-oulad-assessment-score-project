@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Student assessment regression</p>
+  <h1>Explore what goes<br>into a score estimate.</h1>
+  <p class="intro">Use course details and student background to estimate an assessment score. Add previous assessment results when you have them.</p>
+  <a class="button" href="{{ url_for('predict_datapoint') }}">Try the estimator <span aria-hidden="true">→</span></a>
+</section>
+<section class="overview" aria-label="How it works">
+  <article><span class="step">01</span><h2>Keep the context</h2><p>Choose a course offering and assessment, then enter the student’s background.</p></article>
+  <article><span class="step">02</span><h2>Add history, optionally</h2><p>Previous results add information. You can also get an estimate with no previous scores.</p></article>
+  <article><span class="step">03</span><h2>Read it as an estimate</h2><p>The model has substantial prediction error. It is a regression exercise, not a grading tool.</p></article>
+</section>
+{% endblock %}

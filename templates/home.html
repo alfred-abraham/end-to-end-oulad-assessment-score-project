@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Estimate an assessment score{% endblock %}
+{% macro select_field(name, label, choices) %}
+<label>{{ label }}<select name="{{ name }}" id="{{ name }}" required>
+  <option value="">Select an option</option>
+  {% for choice in choices %}<option value="{{ choice }}" {% if values.get(name) == choice %}selected{% endif %}>{{ choice }}</option>{% endfor %}
+</select></label>
+{% endmacro %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">Context + optional assessment history</p><h1>Estimate an assessment score</h1><p>Prediction time is one day before the selected assessment’s deadline.</p></div>
+{% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+{% if metadata %}
+<div class="workspace">
+<form action="{{ url_for('predict_datapoint') }}" method="post" id="prediction-form">
+  <section class="card"><div class="section-heading"><span class="step">01</span><h2>Course & assessment</h2></div>
+    <div class="fields">
+      {{ select_field('code_module', 'Module', metadata.categories.code_module) }}
+      {{ select_field('code_presentation', 'Presentation', metadata.categories.code_presentation) }}
+      <label class="wide">Assessment to predict<select name="target_assessment_id" id="target_assessment_id" required data-selected="{{ values.get('target_assessment_id', '') }}"><option value="">Choose a module and presentation first</option></select></label>
+    </div>
+    <p id="assessment-summary" class="helper" aria-live="polite">Assessment type, weight, and deadline come from the OULAD course schedule.</p>
+    <noscript><p>This form needs JavaScript to select the course assessments.</p></noscript>
+  </section>
+  <section class="card"><div class="section-heading"><span class="step">02</span><h2>Student context</h2></div>
+    <div class="fields">
+      {{ select_field('gender', 'Gender (F / M)', metadata.categories.gender) }}
+      {{ select_field('age_band', 'Age band (55<= means 55 and older)', metadata.categories.age_band) }}
+      {{ select_field('region', 'Region', metadata.categories.region) }}
+      {{ select_field('highest_education', 'Highest education', metadata.categories.highest_education) }}
+      {{ select_field('imd_band', 'Deprivation band (IMD)', metadata.categories.imd_band) }}
+      {{ select_field('disability', 'Recorded disability (Y / N)', metadata.categories.disability) }}
+      <label>Previous course attempts<input name="num_of_prev_attempts" type="number" step="1" min="{{ metadata.numeric_limits.num_of_prev_attempts.min|int }}" max="{{ metadata.numeric_limits.num_of_prev_attempts.max|int }}" value="{{ values.get('num_of_prev_attempts', '') }}" required></label>
+      <label>Studied credits<input name="studied_credits" type="number" step="1" min="{{ metadata.numeric_limits.studied_credits.min|int }}" max="{{ metadata.numeric_limits.studied_credits.max|int }}" value="{{ values.get('studied_credits', '') }}" required></label>
+    </div>
+  </section>
+  <section class="card"><div class="section-heading"><span class="step">03</span><h2>Previous assessment results <span class="badge">Optional</span></h2></div>
+    <p class="helper">Leave this section empty to estimate from context alone. Only add results for this student in the selected module and presentation. Submission days are measured from the start of that course offering.</p>
+    <p class="helper">To match training, a previous score is used only after {{ metadata.release_lag_days }} days have passed since both its deadline and submission, strictly before the prediction day. More recent records are excluded.</p>
+    <div id="history-rows">
+      {% for row in history_rows %}
+      <div class="history-row">
+        <label>Previous assessment<select name="prior_assessment_id" class="prior-assessment" data-selected="{{ row.assessment }}"><option value="">Select an assessment</option></select></label>
+        <label>Score / 100<input name="prior_score" type="number" min="0" max="100" step="any" value="{{ row.score }}"></label>
+        <label>Submission day<input name="prior_submitted" type="number" min="-1000" max="2000" step="1" value="{{ row.submitted }}"></label>
+        <button type="button" class="remove-row secondary" aria-label="Remove previous assessment">Remove</button>
+      </div>
+      {% endfor %}
+    </div>
+    <button type="button" id="add-history" class="secondary">+ Add a previous assessment</button>
+    <p id="history-message" class="helper" aria-live="polite"></p>
+  </section>
+  <button type="submit" class="button submit">Estimate score <span aria-hidden="true">→</span></button>
+</form>
+<aside>
+  <section class="card result-card" aria-live="polite" id="result-panel">
+    <p class="eyebrow">Estimated assessment score</p>
+    {% if result is not none %}
+      <p class="score"><span id="predicted-score">{{ '%.1f'|format(result.score) }}</span><span class="score-unit"> / 100</span></p>
+      <p>Used <strong>{{ result.history_count }}</strong> earlier assessment result{{ '' if result.history_count == 1 else 's' }}.</p>
+      {% if result.history_count == 0 %}<p class="helper">No eligible previous scores were supplied. This estimate uses context and the model’s learned no-history pattern.</p>{% endif %}
+      {% if result.ignored_history_count %}<p class="notice">Excluded {{ result.ignored_history_count }} record{{ '' if result.ignored_history_count == 1 else 's' }} that did not pass the availability cutoff.</p>{% endif %}
+    {% else %}<p class="empty-result">Your estimate will appear here.</p><p class="helper">Complete the contextual fields. Previous scores are optional.</p>{% endif %}
+  </section>
+  <section class="card evidence"><h2>How accurate is it?</h2>
+    <div class="metric"><span>Test MAE</span><strong>{{ '%.2f'|format(metadata.test_metrics.MAE) }} marks</strong></div>
+    <div class="metric"><span>Test RMSE</span><strong>{{ '%.2f'|format(metadata.test_metrics.RMSE) }}</strong></div>
+    <div class="metric"><span>Test R²</span><strong>{{ '%.3f'|format(metadata.test_metrics.R2) }}</strong></div>
+    <p class="helper">These describe overall held-out assessment errors, not an uncertainty interval for your estimate. Accuracy varies by assessment and score range.</p>
+    <p class="helper">Grade-release times are absent from the dataset. The {{ metadata.release_lag_days }}-day rule is an assumption, not a guarantee. This model has not been validated for future course presentations.</p>
+  </section>
+</aside>
+</div>
+<script id="assessment-catalog" type="application/json" data-release-lag="{{ metadata.release_lag_days }}">{{ metadata.assessment_catalog|tojson }}</script>
+<template id="history-template"><div class="history-row">
+  <label>Previous assessment<select name="prior_assessment_id" class="prior-assessment"><option value="">Select an assessment</option></select></label>
+  <label>Score / 100<input name="prior_score" type="number" min="0" max="100" step="any"></label>
+  <label>Submission day<input name="prior_submitted" type="number" min="-1000" max="2000" step="1"></label>
+  <button type="button" class="remove-row secondary" aria-label="Remove previous assessment">Remove</button>
+</div></template>
+{% endif %}
+{% endblock %}
