@@ -4,6 +4,46 @@ A Flask regression demo using the Random Forest selected in
 `notebook/Model Training with Assessment History.ipynb`. Contextual inputs are retained;
 previous assessment results are optional. The application calculates the history features.
 
+## Major findings
+
+The recorded experiment compared models on the same student-disjoint 60/20/20
+train/validation/test partitions. Model selection used validation RMSE; the test
+set contained 33,774 assessment records from 4,659 held-out students. The selected
+context-only model was XGBoost, and the selected model with history was Random Forest.
+
+| Model / assumed grade-release delay | Test R² | Test RMSE | Test MAE |
+| --- | ---: | ---: | ---: |
+| Context-only reference (XGBoost) | 0.160 | 17.13 | 13.08 |
+| Context + assessment history (Random Forest, 28 days) | 0.351 | 15.06 | 11.03 |
+| Context + assessment history (Random Forest, 56 days) | 0.300 | 15.63 | 11.56 |
+
+RMSE and MAE are measured in assessment score points; lower is better. R² is a
+regression measure, not classification accuracy.
+
+- **Assessment history improved the recorded predictions.** With the 28-day
+  availability assumption, test RMSE fell by **12.1%** and MAE by **15.7%** relative
+  to the context-only reference. This compares two selected model pipelines; it
+  does not isolate the effect of adding history to an otherwise identical model.
+- **The result depended on when grades were assumed available.** With a 56-day
+  delay, RMSE improved by **8.7%** and MAE by **11.7%**. The experiment therefore
+  **did not pass its predeclared notable-improvement gate**, which required at
+  least 10% reductions in both errors on validation and test under both delays,
+  plus positive lower 95% student-bootstrap bounds for the test improvements.
+- **Predictions were less reliable when history was unavailable.** In the saved
+  28-day model, test MAE was **10.13** points for records with usable history and
+  **13.62** without it. About **74.3%** of test records had usable history. These
+  groups contain different records, so this is not a controlled comparison.
+- **Assessment context and previous grades carried predictive information.**
+  Individual permutation importance ranked assessment weight, assessment type,
+  and mean prior score highest. Correlated inputs can share importance, and
+  these associations do not establish causes of student performance.
+
+These findings support a retrospective demonstration. An average absolute error
+of about 11 points still leaves substantial uncertainty for individual estimates.
+The holdout had been inspected previously, and actual grade-release timestamps
+are unavailable; the results do not establish performance on future courses or
+suitability for high-stakes student decisions.
+
 ## Run locally
 
 Use Python 3.12 and run these commands from the project folder:
