@@ -10,6 +10,7 @@
   const rows = document.getElementById('history-rows');
   const add = document.getElementById('add-history');
   const message = document.getElementById('history-message');
+  let nextHistoryRow = 0;
   const label = a => `${a.assessment_type} · day ${a.deadline} · ${a.weight}% weight · #${a.id_assessment}`;
   const offering = () => catalog.filter(a => a.code_module === module.value && a.code_presentation === presentation.value);
   function populate(select, items, chosen = '') {
@@ -74,7 +75,16 @@
   target.addEventListener('change', summary);
   add.addEventListener('click', () => {
     if (add.disabled || rows.children.length >= 50) return;
-    rows.append(document.getElementById('history-template').content.cloneNode(true));
+    const fragment = document.getElementById('history-template').content.cloneNode(true);
+    const rowKey = `new-${nextHistoryRow++}`;
+    fragment.querySelectorAll('[id], [aria-describedby]').forEach(element => {
+      ['id', 'aria-describedby'].forEach(attribute => {
+        if (element.hasAttribute(attribute)) {
+          element.setAttribute(attribute, element.getAttribute(attribute).replaceAll('__ROW__', rowKey));
+        }
+      });
+    });
+    rows.append(fragment);
     updateHistory();
     rows.lastElementChild.querySelector('select').focus();
   });

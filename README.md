@@ -156,8 +156,30 @@ The Elastic Beanstalk entry point is `app:application`.
 
 Select the module, presentation, and assessment being predicted. The public OULAD
 schedule supplies its assessment type, weight, and deadline. Enter gender, region,
-highest education, deprivation band, age band, previous course attempts, studied
-credits, and disability. Options retain the dataset's original category values.
+highest education, deprivation band, age band, previous attempts at this module,
+current course load in credits, and disability. Options retain the dataset's original category values.
+
+The form displays numerical limits and examples beside each field:
+
+| Input | What to enter | Current accepted range |
+| --- | --- | --- |
+| Previous attempts at this module | Earlier attempts at the selected module; enter 0 for a first attempt | 0–6, whole numbers |
+| Current course load (credits) | Total credits across modules currently studied during this course; excludes credits already earned | 30–630, whole numbers |
+| Previous score (out of 100) | Actual assessment mark, including for assessments with 0% course weight | 0–100; decimals accepted |
+| Submission day from course start | Actual submission day relative to the start of the selected course offering | −1000 to 2000, whole days |
+
+For example, two current 60-credit modules mean a course load of 120 credits,
+a typical full-time annual load. Do not enter cumulative credits earned toward a degree.
+Submission day 0 is course start, day 18 is 18 days after it, and day −5 is five
+days before it. Do not enter a calendar date, the assessment deadline, or days since today.
+
+Course-load and previous-attempt limits are read from the fitted model's metadata,
+so the displayed bounds follow the loaded artifact if it is retrained. They describe
+accepted training-data ranges, not recommended workloads or a guarantee of reliable
+predictions throughout the range. Values near either extreme may be uncommon.
+Score and submission-day limits are form validation bounds; historical availability
+is checked separately. The same helper text appears on added history rows and after
+validation errors, and is linked to numerical inputs for assistive technology.
 
 Optionally add previous assessments from that same student's selected course offering,
 with their score and submission day. Days are relative to the course start, not calendar

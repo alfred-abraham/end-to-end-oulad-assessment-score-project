@@ -57,8 +57,8 @@ class CustomData:
                 target['code_presentation'] != context['code_presentation']):
             raise InputError('Select an assessment from the chosen module and presentation.')
         context.update(assessment_type=target['assessment_type'], weight=target['weight'])
-        for field, label in [('num_of_prev_attempts', 'Previous course attempts'),
-                             ('studied_credits', 'Studied credits')]:
+        for field, label in [('num_of_prev_attempts', 'Previous attempts at this module'),
+                             ('studied_credits', 'Current course load (credits)')]:
             limits = self.metadata['numeric_limits'][field]
             context[field] = number(self.form.get(field), label, limits['min'], limits['max'], integer=True)
 

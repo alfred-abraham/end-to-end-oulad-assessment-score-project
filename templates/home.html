@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Estimate an assessment score{% endblock %}
-{% macro select_field(name, label, choices) %}
-<label>{{ label }}<select name="{{ name }}" id="{{ name }}" required>
+{% macro select_field(name, label, choices, hint="") %}
+<label>{{ label }}<select name="{{ name }}" id="{{ name }}" {% if hint %}aria-describedby="{{ name }}-help"{% endif %} required>
   <option value="">Select an option</option>
   {% for choice in choices %}<option value="{{ choice }}" {% if values.get(name) == choice %}selected{% endif %}>{{ choice }}</option>{% endfor %}
-</select></label>
+</select>{% if hint %}<small class="field-hint" id="{{ name }}-help">{{ hint }}</small>{% endif %}</label>
+{% endmacro %}
+{% macro history_row(row, key) %}
+<div class="history-row">
+  <label>Previous assessment<select name="prior_assessment_id" class="prior-assessment" data-selected="{{ row.get('assessment', '') }}"><option value="">Select an assessment</option></select></label>
+  <label>Previous score (out of 100)<input name="prior_score" type="number" min="0" max="100" step="any" value="{{ row.get('score', '') }}" aria-describedby="score-help-{{ key }}"><small class="field-hint" id="score-help-{{ key }}">Allowed: 0–100. Enter the actual mark; decimals are accepted (for example, 78.5).</small></label>
+  <label>Submission day from course start<input name="prior_submitted" type="number" min="-1000" max="2000" step="1" value="{{ row.get('submitted', '') }}" aria-describedby="submission-help-{{ key }}"><small class="field-hint" id="submission-help-{{ key }}">Allowed: −1000 to 2000, whole days. Day 0 is the course start; 18 means 18 days after it, and −5 means 5 days before it. Enter the actual submission day, not the deadline or days since today.</small></label>
+  <button type="button" class="remove-row secondary" aria-label="Remove previous assessment">Remove</button>
+</div>
 {% endmacro %}
 {% block content %}
 <div class="page-heading"><p class="eyebrow">Context + optional assessment history</p><h1>Estimate an assessment score</h1><p>Prediction time is one day before the selected assessment’s deadline.</p></div>
@@ -15,7 +23,7 @@
   <section class="card"><div class="section-heading"><span class="step">01</span><h2>Course & assessment</h2></div>
     <div class="fields">
       {{ select_field('code_module', 'Module', metadata.categories.code_module) }}
-      {{ select_field('code_presentation', 'Presentation', metadata.categories.code_presentation) }}
+      {{ select_field('code_presentation', 'Course offering (presentation)', metadata.categories.code_presentation, 'Choose the dataset code for when this module was offered, for example 2014J.') }}
       <label class="wide">Assessment to predict<select name="target_assessment_id" id="target_assessment_id" required data-selected="{{ values.get('target_assessment_id', '') }}"><option value="">Choose a module and presentation first</option></select></label>
     </div>
     <p id="assessment-summary" class="helper" aria-live="polite">Assessment type, weight, and deadline come from the OULAD course schedule.</p>
@@ -24,26 +32,22 @@
   <section class="card"><div class="section-heading"><span class="step">02</span><h2>Student context</h2></div>
     <div class="fields">
       {{ select_field('gender', 'Gender (F / M)', metadata.categories.gender) }}
-      {{ select_field('age_band', 'Age band (55<= means 55 and older)', metadata.categories.age_band) }}
+      {{ select_field('age_band', 'Age group', metadata.categories.age_band, 'The dataset label 55<= means age 55 or older.') }}
       {{ select_field('region', 'Region', metadata.categories.region) }}
-      {{ select_field('highest_education', 'Highest education', metadata.categories.highest_education) }}
+      {{ select_field('highest_education', 'Highest qualification before this course', metadata.categories.highest_education) }}
       {{ select_field('imd_band', 'Deprivation band (IMD)', metadata.categories.imd_band) }}
       {{ select_field('disability', 'Recorded disability (Y / N)', metadata.categories.disability) }}
-      <label>Previous course attempts<input name="num_of_prev_attempts" type="number" step="1" min="{{ metadata.numeric_limits.num_of_prev_attempts.min|int }}" max="{{ metadata.numeric_limits.num_of_prev_attempts.max|int }}" value="{{ values.get('num_of_prev_attempts', '') }}" required></label>
-      <label>Studied credits<input name="studied_credits" type="number" step="1" min="{{ metadata.numeric_limits.studied_credits.min|int }}" max="{{ metadata.numeric_limits.studied_credits.max|int }}" value="{{ values.get('studied_credits', '') }}" required></label>
+      <label>Previous attempts at this module<input name="num_of_prev_attempts" type="number" step="1" min="{{ metadata.numeric_limits.num_of_prev_attempts.min|int }}" max="{{ metadata.numeric_limits.num_of_prev_attempts.max|int }}" value="{{ values.get('num_of_prev_attempts', '') }}" aria-describedby="attempts-help numeric-range-note" required><small class="field-hint" id="attempts-help">Allowed: {{ metadata.numeric_limits.num_of_prev_attempts.min|int }}–{{ metadata.numeric_limits.num_of_prev_attempts.max|int }}, whole attempts. Enter 0 for a first attempt. Count earlier attempts at this module, not other modules.</small></label>
+      <label>Current course load (credits)<input name="studied_credits" type="number" step="1" min="{{ metadata.numeric_limits.studied_credits.min|int }}" max="{{ metadata.numeric_limits.studied_credits.max|int }}" value="{{ values.get('studied_credits', '') }}" aria-describedby="credits-help numeric-range-note" required><small class="field-hint" id="credits-help">Allowed: {{ metadata.numeric_limits.studied_credits.min|int }}–{{ metadata.numeric_limits.studied_credits.max|int }}, whole credits. Total credits across modules currently studied, excluding credits already earned. Example: two 60-credit modules = 120 (a typical full-time annual load).</small></label>
     </div>
+    <p class="helper" id="numeric-range-note">The course-load and previous-attempt limits come from the data used to fit the model. They are accepted input ranges, not recommended workloads. Values near either limit may be uncommon; acceptance does not guarantee a reliable prediction. Enter the student’s actual values.</p>
   </section>
   <section class="card"><div class="section-heading"><span class="step">03</span><h2>Previous assessment results <span class="badge">Optional</span></h2></div>
-    <p class="helper">Leave this section empty to estimate from context alone. Only add results for this student in the selected module and presentation. Submission days are measured from the start of that course offering.</p>
-    <p class="helper">To match training, a previous score is used only after {{ metadata.release_lag_days }} days have passed since both its deadline and submission, strictly before the prediction day. More recent records are excluded.</p>
+    <p class="helper">Add up to 50 previous assessments, or leave this section empty to estimate from context alone. Only add results for this student in the selected module and presentation. Enter a mark out of 100, even for a 0%-weight assessment. Submission days are measured from the start of that course offering.</p>
+    <p class="helper">To match training, a previous score is used only after {{ metadata.release_lag_days }} days have passed since both its deadline and submission, strictly before the prediction day. More recent records are excluded. The score and submission-day limits below are form validation limits; they do not override this availability rule.</p>
     <div id="history-rows">
       {% for row in history_rows %}
-      <div class="history-row">
-        <label>Previous assessment<select name="prior_assessment_id" class="prior-assessment" data-selected="{{ row.assessment }}"><option value="">Select an assessment</option></select></label>
-        <label>Score / 100<input name="prior_score" type="number" min="0" max="100" step="any" value="{{ row.score }}"></label>
-        <label>Submission day<input name="prior_submitted" type="number" min="-1000" max="2000" step="1" value="{{ row.submitted }}"></label>
-        <button type="button" class="remove-row secondary" aria-label="Remove previous assessment">Remove</button>
-      </div>
+      {{ history_row(row, 'saved-' ~ loop.index0) }}
       {% endfor %}
     </div>
     <button type="button" id="add-history" class="secondary">+ Add a previous assessment</button>
@@ -71,11 +75,6 @@
 </aside>
 </div>
 <script id="assessment-catalog" type="application/json" data-release-lag="{{ metadata.release_lag_days }}">{{ metadata.assessment_catalog|tojson }}</script>
-<template id="history-template"><div class="history-row">
-  <label>Previous assessment<select name="prior_assessment_id" class="prior-assessment"><option value="">Select an assessment</option></select></label>
-  <label>Score / 100<input name="prior_score" type="number" min="0" max="100" step="any"></label>
-  <label>Submission day<input name="prior_submitted" type="number" min="-1000" max="2000" step="1"></label>
-  <button type="button" class="remove-row secondary" aria-label="Remove previous assessment">Remove</button>
-</div></template>
+<template id="history-template">{{ history_row({}, "__ROW__") }}</template>
 {% endif %}
 {% endblock %}
