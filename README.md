@@ -1,7 +1,7 @@
 # OULAD assessment score estimator
 
 A Flask regression demo using the Random Forest selected in
-`notebook/Model Training with Assessment History.ipynb`. Contextual inputs are retained;
+`notebook/Model Training.ipynb`. Contextual inputs are retained;
 previous assessment results are optional. The application calculates the history features.
 
 ## Major findings
@@ -10,6 +10,33 @@ The recorded experiment compared models on the same student-disjoint 60/20/20
 train/validation/test partitions. Model selection used validation RMSE; the test
 set contained 33,774 assessment records from 4,659 held-out students. The selected
 context-only model was XGBoost, and the selected model with history was Random Forest.
+
+### Validation comparison of all five algorithms
+
+Both feature sets were rerun with Linear Regression, K-Nearest Neighbors (KNN),
+Decision Tree, Random Forest, and XGBoost. KNN uses 25 neighbors; Decision Tree
+uses maximum depth 12 and at least 20 samples per leaf. These restore the earlier
+context-only settings. All algorithms use the same student splits and preprocessing;
+no hyperparameters were tuned against the rerun's test results.
+
+| Algorithm | Context RMSE | Context MAE | History (28 days) RMSE | History (28 days) MAE |
+| --- | ---: | ---: | ---: | ---: |
+| Linear Regression | 17.73 | 13.64 | 16.29 | 12.21 |
+| K-Nearest Neighbors (KNN) | 17.78 | 13.58 | 15.44 | 11.35 |
+| Decision Tree | 17.54 | 13.48 | 15.54 | 11.45 |
+| Random Forest | 17.22 | 13.24 | 14.99 | 11.01 |
+| XGBoost | 17.05 | 13.13 | 15.03 | 11.09 |
+
+The added algorithms did not change the winners: XGBoost has the lowest
+context-only validation RMSE, and Random Forest has the lowest validation RMSE
+with history. Simple mean/median and prior-score baselines are also evaluated in
+the [executed notebook](notebook/Model%20Training.ipynb).
+
+### Test results for the validation-selected models
+
+Only validation-selected models and the established simple baselines are evaluated
+on the test set; test scores do not select the winning algorithm. The selected-model
+test metrics and the robustness-check outcome are unchanged after this rerun.
 
 | Model / assumed grade-release delay | Test R² | Test RMSE | Test MAE |
 | --- | ---: | ---: | ---: |
