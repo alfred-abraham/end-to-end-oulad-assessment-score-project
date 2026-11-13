@@ -22,6 +22,7 @@ version='0.0.1',
 author='Alfred',
 author_email='alfred.f.abraham@gmail.com',
 packages=find_packages(),
+package_data={'src': ['model_selection.json']},
 install_requires=get_requirements('requirements.txt')
 
 )

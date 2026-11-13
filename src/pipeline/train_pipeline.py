@@ -26,19 +26,23 @@ def make_catalog(data_dir):
     return catalog
 
 
-def train(data_dir=DATA_DIR, artifact_dir=ARTIFACT_DIR):
+def train(data_dir=DATA_DIR, artifact_dir=ARTIFACT_DIR, tune=False):
     print('Loading OULAD and allocating disjoint student groups...', flush=True)
     data, labels = DataIngestion(data_dir).initiate_data_ingestion()
     print('Building strictly earlier assessment histories...', flush=True)
     frame, X, y, partitions = DataTransformation().initiate_data_transformation(data, labels)
-    print('Fitting the notebook-selected Random Forest pipeline...', flush=True)
-    model, metrics, subsets = ModelTrainer().initiate_model_trainer(X, y, partitions)
+    trainer = ModelTrainer(tune=tune)
+    print('Tuning on validation students...' if tune else 'Refitting the frozen tuned recipe...', flush=True)
+    model, metrics, subsets = trainer.initiate_model_trainer(X, y, partitions)
     trainval = np.concatenate([partitions['train'], partitions['validation']])
     fitted_data = X.loc[trainval]
     categories = {column: sorted(fitted_data[column].dropna().unique().tolist())
                   for column in fitted_data.select_dtypes(exclude='number').columns}
     metadata = {
-        'schema_version': 1, 'model': 'Random Forest with assessment history',
+        'schema_version': 1, 'model': trainer.selection['name'] + ' with assessment history',
+        'selection': trainer.selection,
+        'selection_method': 'Minimum validation RMSE on fixed student-disjoint split; '
+                            'original recipes plus bounded deterministic hyperparameter search.',
         'trained_at_utc': datetime.now(timezone.utc).isoformat(),
         'release_lag_days': SCORE_RELEASE_LAG, 'prediction_offset_days': -1,
         'seed': SEED, 'feature_columns': FEATURE_COLUMNS,
@@ -52,7 +56,7 @@ def train(data_dir=DATA_DIR, artifact_dir=ARTIFACT_DIR):
             for name, idx in partitions.items()},
         'excluded_unknown_deadline_rows': int(data.date.isna().sum()),
         'versions': {name: importlib.metadata.version(name)
-                     for name in ['numpy', 'pandas', 'scikit-learn', 'joblib']},
+                     for name in ['numpy', 'pandas', 'scikit-learn', 'joblib', 'xgboost']},
         'cleaned_data_sha256': file_sha256(Path(data_dir) / 'combinedfile_cleaned.csv'),
         'availability_note': 'Grade-release timestamps are absent. Assume availability '
             '28 days after the later of deadline and submission; this is not a guarantee.',
@@ -60,6 +64,8 @@ def train(data_dir=DATA_DIR, artifact_dir=ARTIFACT_DIR):
             'history updates; not an independent blind or future-course test.',
     }
     artifact_dir = Path(artifact_dir)
+    if trainer.trials is not None:
+        save_json(artifact_dir / 'history_tuning_trials.json', trainer.trials.to_dict(orient='records'))
     save_object(artifact_dir / MODEL_FILENAME, model)
     metadata['model_sha256'] = file_sha256(artifact_dir / MODEL_FILENAME)
     save_json(artifact_dir / METADATA_FILENAME, metadata)
@@ -72,8 +78,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', type=Path, default=DATA_DIR)
     parser.add_argument('--artifact-dir', type=Path, default=ARTIFACT_DIR)
+    parser.add_argument('--tune', action='store_true', help='Repeat the bounded history search before refitting')
     args = parser.parse_args()
-    train(args.data_dir, args.artifact_dir)
+    train(args.data_dir, args.artifact_dir, tune=args.tune)
 
 
 if __name__ == '__main__':

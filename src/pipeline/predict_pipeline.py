@@ -105,7 +105,7 @@ class PredictPipeline:
                 raise ValueError('Unsupported feature schema')
             if self.metadata['model_sha256'] != file_sha256(model_path):
                 raise ValueError('Model and metadata do not match')
-            for package in ['scikit-learn', 'numpy', 'pandas', 'joblib']:
+            for package in self.metadata['versions']:
                 if importlib.metadata.version(package) != self.metadata['versions'][package]:
                     raise ValueError(f'{package} differs from the training environment')
             self.model = load_object(model_path)

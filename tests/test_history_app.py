@@ -51,7 +51,7 @@ def test_notebook_feature_parity_and_online_parity():
     data = data.loc[data.id_student.isin(selected)].copy()
     data['prediction_day'] = data['date'] - 1
     notebook = json.loads((PROJECT_ROOT / 'notebook' /
-        'Model Training with Assessment History.ipynb').read_text(encoding='utf-8'))
+        'Model Training.ipynb').read_text(encoding='utf-8'))
     feature_cell = next(c for c in notebook['cells']
         if c['cell_type'] == 'code' and 'def history_features(' in ''.join(c['source']))
     syntax = ast.parse(''.join(feature_cell['source']))
@@ -107,7 +107,8 @@ def test_routes_and_real_predictions(client):
         response = client.post('/predictdata', data=form)
         assert response.status_code == 200
         assert b'id="predicted-score"' in response.data
-        assert b'11.03 marks' in response.data
+        expected_mae = f"{get_predictor().metadata['test_metrics']['MAE']:.2f} marks".encode()
+        assert expected_mae in response.data
     assert b'No eligible previous scores were supplied' in client.post('/predictdata', data=valid_form()).data
 
 
@@ -157,9 +158,13 @@ def test_paths_do_not_depend_on_working_directory(monkeypatch, tmp_path):
 
 
 def test_saved_model_reproduces_notebook_metrics(predictor):
-    assert predictor.metadata['test_metrics']['RMSE'] == pytest.approx(15.057307511156434, abs=1e-6)
-    assert predictor.metadata['test_metrics']['MAE'] == pytest.approx(11.027464137848316, abs=1e-6)
-    assert predictor.metadata['test_metrics']['R2'] == pytest.approx(.3506713319399456, abs=1e-6)
+    report = json.loads((ARTIFACT_DIR / 'tuning_results.json').read_text(encoding='utf-8'))
+    for metric in ['RMSE', 'MAE', 'R2']:
+        assert predictor.metadata['test_metrics'][metric] == pytest.approx(
+            report['test_results']['History 28d'][metric], abs=1e-6)
+    selection = report['selected_parameters']['history']
+    assert predictor.metadata['selection'] == selection
+    assert predictor.model.named_steps['model'].get_params().items() >= selection['params'].items()
     counts = predictor.metadata['split_counts']
     assert counts['test']['rows'] == 33774
     assert sum(row['rows'] for row in counts.values()) == 168966

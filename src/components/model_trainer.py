@@ -1,11 +1,11 @@
-"""Fit the notebook's validation-selected Random Forest without test-set tuning."""
+"""Select on validation students and refit the frozen recipe on train + validation."""
 import numpy as np
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.pipeline import Pipeline
 
 from src.components.data_transformation import DataTransformation
 from src.config import SEED
+from src.tuning import make_estimator, selected_recipe, tune_candidates
 
 
 def regression_metrics(actual, predicted):
@@ -15,16 +15,26 @@ def regression_metrics(actual, predicted):
 
 
 class ModelTrainer:
+    def __init__(self, tune=False):
+        self.tune = tune
+        self.selection = selected_recipe()['history']
+        self.trials = None
+
     def make_pipeline(self, features):
         return Pipeline([
             ('preprocessor', DataTransformation().get_data_transformer_object(features)),
-            ('model', RandomForestRegressor(n_estimators=150, max_depth=16,
-                min_samples_leaf=10, max_features=.8, random_state=SEED, n_jobs=-1)),
+            ('model', make_estimator(self.selection['name'], self.selection['params'])),
         ])
 
     def initiate_model_trainer(self, features, target, partitions):
-        # Model and settings were selected on validation data in the notebook.
-        # Refit exactly that recipe on train + validation, leaving test untouched.
+        if self.tune:
+            _, self.trials = tune_candidates(features, target, partitions['train'],
+                partitions['validation'],
+                DataTransformation().get_data_transformer_object(features), 'History 28d', SEED)
+            best = self.trials.sort_values('Validation RMSE', kind='stable').iloc[0]
+            self.selection = {'name': best['Model'], 'params': best['Parameters'],
+                              'validation_rmse': float(best['Validation RMSE'])}
+        # Refit the validation-selected recipe; test metrics never choose parameters.
         trainval = np.concatenate([partitions['train'], partitions['validation']])
         test = partitions['test']
         model = self.make_pipeline(features)

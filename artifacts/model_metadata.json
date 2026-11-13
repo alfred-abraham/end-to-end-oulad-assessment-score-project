@@ -1,7 +1,25 @@
 {
   "schema_version": 1,
-  "model": "Random Forest with assessment history",
-  "trained_at_utc": "2026-11-12T21:19:03.306854+00:00",
+  "model": "XGBoost with assessment history",
+  "selection": {
+    "name": "XGBoost",
+    "params": {
+      "n_estimators": 300,
+      "max_depth": 7,
+      "learning_rate": 0.03,
+      "subsample": 0.8,
+      "colsample_bytree": 1.0,
+      "objective": "reg:squarederror",
+      "tree_method": "hist",
+      "random_state": 42,
+      "n_jobs": 4,
+      "reg_lambda": 1.0,
+      "min_child_weight": 10
+    },
+    "validation_rmse": 14.897360932493086
+  },
+  "selection_method": "Minimum validation RMSE on fixed student-disjoint split; original recipes plus bounded deterministic hyperparameter search.",
+  "trained_at_utc": "2026-11-13T16:18:05.371972+00:00",
   "release_lag_days": 28,
   "prediction_offset_days": -1,
   "seed": 42,
@@ -1671,22 +1689,22 @@
     }
   },
   "test_metrics": {
-    "R2": 0.3506713319399457,
-    "RMSE": 15.057307511156433,
-    "MAE": 11.027464137848316
+    "R2": 0.35633598371502573,
+    "RMSE": 14.991484725339317,
+    "MAE": 10.998903162774335
   },
   "test_subgroups": {
     "with_history": {
       "rows": 25109,
-      "R2": 0.44106724536012143,
-      "RMSE": 13.61396964511306,
-      "MAE": 10.132185628444097
+      "R2": 0.44735285529115687,
+      "RMSE": 13.537203661429514,
+      "MAE": 10.087876942210064
     },
     "without_history": {
       "rows": 8665,
-      "R2": 0.11356272751119134,
-      "RMSE": 18.618221377858557,
-      "MAE": 13.621757051019756
+      "R2": 0.11783229637737447,
+      "RMSE": 18.573329465570506,
+      "MAE": 13.638828999144591
     }
   },
   "split_counts": {
@@ -1708,10 +1726,11 @@
     "numpy": "2.5.4",
     "pandas": "3.0.1",
     "scikit-learn": "1.9.1",
-    "joblib": "1.6.0"
+    "joblib": "1.6.0",
+    "xgboost": "3.4.1"
   },
   "cleaned_data_sha256": "f6019c12b1a91ef5618d14dd38a17c34eefc99aadfcaed0fe8e1156f30227878",
   "availability_note": "Grade-release timestamps are absent. Assume availability 28 days after the later of deadline and submission; this is not a guarantee.",
   "evaluation_note": "Student-disjoint, retrospective evaluation with sequential history updates; not an independent blind or future-course test.",
-  "model_sha256": "5cfc60114c8ec76adb886fa14bfa1db61b731500fe3f9c68c13580aa7d1f4b44"
+  "model_sha256": "90206c4ec3129cd1fa6b4f230c2cd9e9ea1381e6d6a6b1f50bf776b74502640c"
 }

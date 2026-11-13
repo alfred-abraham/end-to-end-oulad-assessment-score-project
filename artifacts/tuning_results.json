@@ -1,0 +1,1406 @@
+{
+  "tuning_trials": [
+    {
+      "Feature set": "Context",
+      "Model": "Linear Regression",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {},
+      "Validation RMSE": 17.72697220696537,
+      "Validation MAE": 13.64141976051762,
+      "Validation R2": 0.09945915413302375
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Linear Regression",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "fit_intercept": true
+      },
+      "Validation RMSE": 17.72697220696537,
+      "Validation MAE": 13.64141976051762,
+      "Validation R2": 0.09945915413302375
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Linear Regression",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "fit_intercept": false
+      },
+      "Validation RMSE": 17.726972206965385,
+      "Validation MAE": 13.641419760517683,
+      "Validation R2": 0.09945915413302242
+    },
+    {
+      "Feature set": "Context",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_neighbors": 25,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.779945142947273,
+      "Validation MAE": 13.576042370559765,
+      "Validation R2": 0.09406899854250295
+    },
+    {
+      "Feature set": "Context",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 15,
+        "n_jobs": 4,
+        "weights": "uniform"
+      },
+      "Validation RMSE": 18.15055152297981,
+      "Validation MAE": 13.81509958502014,
+      "Validation R2": 0.05590881979929252
+    },
+    {
+      "Feature set": "Context",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 15,
+        "n_jobs": 4,
+        "weights": "distance"
+      },
+      "Validation RMSE": 19.09583770609238,
+      "Validation MAE": 14.3602092946634,
+      "Validation R2": -0.04498899851947469
+    },
+    {
+      "Feature set": "Context",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 50,
+        "n_jobs": 4,
+        "weights": "uniform"
+      },
+      "Validation RMSE": 17.502291995264823,
+      "Validation MAE": 13.401431832709342,
+      "Validation R2": 0.12214226864967614
+    },
+    {
+      "Feature set": "Context",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 50,
+        "n_jobs": 4,
+        "weights": "distance"
+      },
+      "Validation RMSE": 18.617204300856645,
+      "Validation MAE": 14.026488312328878,
+      "Validation R2": 0.006739379284928071
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "max_depth": 12,
+        "min_samples_leaf": 20,
+        "random_state": 42
+      },
+      "Validation RMSE": 17.54086273298258,
+      "Validation MAE": 13.477406099997545,
+      "Validation R2": 0.11826884116401526
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 17.363977333559866,
+      "Validation MAE": 13.367560718230225,
+      "Validation R2": 0.1359622668914312
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 17.334457770618243,
+      "Validation MAE": 13.354051748665396,
+      "Validation R2": 0.13889757774267564
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 18.089624174093068,
+      "Validation MAE": 13.820642601199474,
+      "Validation R2": 0.062236388425853995
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 16,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 17.523252130553836,
+      "Validation MAE": 13.45409048820688,
+      "Validation R2": 0.12003842597258874
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 18.842235469775304,
+      "Validation MAE": 14.402782976106177,
+      "Validation R2": -0.017417356119644234
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Decision Tree",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": null,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 17.62866960911423,
+      "Validation MAE": 13.554352055979988,
+      "Validation R2": 0.10941912364223227
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.8,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.223982568952554,
+      "Validation MAE": 13.242412010986273,
+      "Validation R2": 0.14983848219676954
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": null,
+        "min_samples_leaf": 20,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.241138169020793,
+      "Validation MAE": 13.25364053875228,
+      "Validation R2": 0.14814406634407806
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": 20,
+        "min_samples_leaf": 3,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.504356335279056,
+      "Validation MAE": 13.445339786468068,
+      "Validation R2": 0.12193517534857423
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.315702222646063,
+      "Validation MAE": 13.315143784027972,
+      "Validation R2": 0.1407599619911093
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 3,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 18.048769387630678,
+      "Validation MAE": 13.850393679356378,
+      "Validation R2": 0.06646741815056756
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": 20,
+        "min_samples_leaf": 20,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.16175304923922,
+      "Validation MAE": 13.200585581431733,
+      "Validation R2": 0.15597057977636308
+    },
+    {
+      "Feature set": "Context",
+      "Model": "Random Forest",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": null,
+        "min_samples_leaf": 3,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 18.04331383570188,
+      "Validation MAE": 13.849713133435246,
+      "Validation R2": 0.06703168551465577
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 17.050595578158177,
+      "Validation MAE": 13.13002891808751,
+      "Validation R2": 0.16686880640680257
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 17.184419217365104,
+      "Validation MAE": 13.208206510818142,
+      "Validation R2": 0.15373962514806983
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 17.09091414880038,
+      "Validation MAE": 13.14791569938958,
+      "Validation R2": 0.16292403231532604
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 5,
+        "learning_rate": 0.07,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 17.194506897337604,
+      "Validation MAE": 13.219314611829319,
+      "Validation R2": 0.15274578190150856
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 10.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 17.13943847675077,
+      "Validation MAE": 13.17234308470788,
+      "Validation R2": 0.1581640516284296
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 5,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 1
+      },
+      "Validation RMSE": 17.070327722178845,
+      "Validation MAE": 13.14750722964612,
+      "Validation R2": 0.16493937501832523
+    },
+    {
+      "Feature set": "Context",
+      "Model": "XGBoost",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 7,
+        "learning_rate": 0.07,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 1
+      },
+      "Validation RMSE": 17.26453028652697,
+      "Validation MAE": 13.260699409780026,
+      "Validation R2": 0.14583096708055032
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Linear Regression",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {},
+      "Validation RMSE": 16.287056133021053,
+      "Validation MAE": 12.212535386176725,
+      "Validation R2": 0.23981468700055708
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Linear Regression",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "fit_intercept": true
+      },
+      "Validation RMSE": 16.287056133021053,
+      "Validation MAE": 12.212535386176725,
+      "Validation R2": 0.23981468700055708
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Linear Regression",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "fit_intercept": false
+      },
+      "Validation RMSE": 16.287056133021057,
+      "Validation MAE": 12.212535386176707,
+      "Validation R2": 0.23981468700055686
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_neighbors": 25,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.438011840524203,
+      "Validation MAE": 11.34682494749338,
+      "Validation R2": 0.31700578107495825
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 15,
+        "n_jobs": 4,
+        "weights": "uniform"
+      },
+      "Validation RMSE": 15.651212925811882,
+      "Validation MAE": 11.487598291378768,
+      "Validation R2": 0.2980110306289562
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 15,
+        "n_jobs": 4,
+        "weights": "distance"
+      },
+      "Validation RMSE": 16.114423495304944,
+      "Validation MAE": 11.658028673628493,
+      "Validation R2": 0.2558442630975205
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 50,
+        "n_jobs": 4,
+        "weights": "uniform"
+      },
+      "Validation RMSE": 15.316084903197016,
+      "Validation MAE": 11.289293519617692,
+      "Validation R2": 0.3277515359485258
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "K-Neighbors Regressor",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_neighbors": 50,
+        "n_jobs": 4,
+        "weights": "distance"
+      },
+      "Validation RMSE": 15.82416323785645,
+      "Validation MAE": 11.468041655573822,
+      "Validation R2": 0.28241095990252496
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "max_depth": 12,
+        "min_samples_leaf": 20,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.543431129341286,
+      "Validation MAE": 11.45018069524109,
+      "Validation R2": 0.30764620859805725
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.69179522174322,
+      "Validation MAE": 11.560339320533284,
+      "Validation R2": 0.29436591275080004
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.671742058733027,
+      "Validation MAE": 11.553689710865445,
+      "Validation R2": 0.29616827553101643
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.922792582354429,
+      "Validation MAE": 11.745208854948878,
+      "Validation R2": 0.2734378595933875
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": 16,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.485212764731271,
+      "Validation MAE": 11.405482514612935,
+      "Validation R2": 0.31282295732257737
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "random_state": 42
+      },
+      "Validation RMSE": 16.51553659020196,
+      "Validation MAE": 12.12785908323441,
+      "Validation R2": 0.21833680167773606
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Decision Tree",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "max_depth": null,
+        "min_samples_leaf": 40,
+        "random_state": 42
+      },
+      "Validation RMSE": 15.573537943280245,
+      "Validation MAE": 11.471847195065799,
+      "Validation R2": 0.304961504812593
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": 16,
+        "min_samples_leaf": 10,
+        "max_features": 0.8,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 14.98639911602036,
+      "Validation MAE": 11.007323870443873,
+      "Validation R2": 0.3563809687648959
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": null,
+        "min_samples_leaf": 20,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.008669027228143,
+      "Validation MAE": 11.015251735926176,
+      "Validation R2": 0.35446670126204427
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": 20,
+        "min_samples_leaf": 3,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.029366878121623,
+      "Validation MAE": 11.032522429120299,
+      "Validation R2": 0.3526850156438144
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 10,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.004911013345083,
+      "Validation MAE": 11.01150188631073,
+      "Validation R2": 0.35478993037467754
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 3,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.22701915564667,
+      "Validation MAE": 11.157815042497385,
+      "Validation R2": 0.3355472908690559
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 150,
+        "max_depth": 20,
+        "min_samples_leaf": 20,
+        "max_features": 0.6,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 14.978110666366597,
+      "Validation MAE": 10.998418110520259,
+      "Validation R2": 0.3570926979407322
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "Random Forest",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 250,
+        "max_depth": null,
+        "min_samples_leaf": 3,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.218977270213397,
+      "Validation MAE": 11.156393554664115,
+      "Validation R2": 0.336248943829792
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 0,
+      "Original recipe": true,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "Validation RMSE": 15.033678217326353,
+      "Validation MAE": 11.093402409877921,
+      "Validation R2": 0.35231358352993447
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 1,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 14.903514073305669,
+      "Validation MAE": 10.950126492791723,
+      "Validation R2": 0.36348058882172685
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 2,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 14.897360932493086,
+      "Validation MAE": 10.955180372832025,
+      "Validation R2": 0.36400607362152193
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 3,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 5,
+        "learning_rate": 0.07,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 14.909941743100221,
+      "Validation MAE": 10.955042114236912,
+      "Validation R2": 0.36293142721596594
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 4,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 600,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 10.0,
+        "min_child_weight": 10
+      },
+      "Validation RMSE": 14.907746257322959,
+      "Validation MAE": 10.956197661257399,
+      "Validation R2": 0.3631190298287039
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 5,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 5,
+        "learning_rate": 0.03,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 1
+      },
+      "Validation RMSE": 15.027620413566492,
+      "Validation MAE": 11.094516491151904,
+      "Validation R2": 0.3528354473952786
+    },
+    {
+      "Feature set": "History 28d",
+      "Model": "XGBoost",
+      "Trial": 6,
+      "Original recipe": false,
+      "Parameters": {
+        "n_estimators": 300,
+        "max_depth": 7,
+        "learning_rate": 0.07,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 1
+      },
+      "Validation RMSE": 14.95719638021711,
+      "Validation MAE": 10.983957875632363,
+      "Validation R2": 0.35888685744947946
+    }
+  ],
+  "selected_parameters": {
+    "context": {
+      "name": "XGBoost",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4
+      },
+      "validation_rmse": 17.050595578158177
+    },
+    "history": {
+      "name": "XGBoost",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": 7,
+        "learning_rate": 0.03,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "random_state": 42,
+        "n_jobs": 4,
+        "reg_lambda": 1.0,
+        "min_child_weight": 10
+      },
+      "validation_rmse": 14.897360932493086
+    },
+    "seed": 42,
+    "cleaned_data_sha256": "f6019c12b1a91ef5618d14dd38a17c34eefc99aadfcaed0fe8e1156f30227878",
+    "method": "Bounded search on fixed student-disjoint validation RMSE; no test-driven selection."
+  },
+  "notable_improvement": false,
+  "feature_importance": [
+    {
+      "Feature": "weight",
+      "Input group": "Context",
+      "Mean RMSE increase": 1.7191785736911442,
+      "Shuffle standard deviation": 0.061352231704069664
+    },
+    {
+      "Feature": "assessment_type",
+      "Input group": "Context",
+      "Mean RMSE increase": 1.1522964369516635,
+      "Shuffle standard deviation": 0.054843631180674826
+    },
+    {
+      "Feature": "prior_mean",
+      "Input group": "History",
+      "Mean RMSE increase": 0.9925692516426764,
+      "Shuffle standard deviation": 0.05316332891873155
+    },
+    {
+      "Feature": "code_module",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.5795224343347612,
+      "Shuffle standard deviation": 0.037075341335742674
+    },
+    {
+      "Feature": "prior_recent3_mean",
+      "Input group": "History",
+      "Mean RMSE increase": 0.4993873522836683,
+      "Shuffle standard deviation": 0.04463025586957709
+    },
+    {
+      "Feature": "prior_latest_mean",
+      "Input group": "History",
+      "Mean RMSE increase": 0.3855689600557941,
+      "Shuffle standard deviation": 0.01106050610589655
+    },
+    {
+      "Feature": "prior_count",
+      "Input group": "History",
+      "Mean RMSE increase": 0.358506145713811,
+      "Shuffle standard deviation": 0.024677671319993537
+    },
+    {
+      "Feature": "region",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.0879731062670718,
+      "Shuffle standard deviation": 0.038193668764480895
+    },
+    {
+      "Feature": "prior_min",
+      "Input group": "History",
+      "Mean RMSE increase": 0.07844857313260789,
+      "Shuffle standard deviation": 0.020447524006668983
+    },
+    {
+      "Feature": "code_presentation",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.0683419704578803,
+      "Shuffle standard deviation": 0.026702647926733245
+    },
+    {
+      "Feature": "days_since_latest_score",
+      "Input group": "History",
+      "Mean RMSE increase": 0.06745187578709136,
+      "Shuffle standard deviation": 0.01256553561370441
+    },
+    {
+      "Feature": "highest_education",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.05754531389293973,
+      "Shuffle standard deviation": 0.01599278491289684
+    },
+    {
+      "Feature": "prior_std",
+      "Input group": "History",
+      "Mean RMSE increase": 0.05596897383613033,
+      "Shuffle standard deviation": 0.0069768778481086105
+    },
+    {
+      "Feature": "imd_band",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.03934086876464882,
+      "Shuffle standard deviation": 0.011593288505640433
+    },
+    {
+      "Feature": "prior_trend",
+      "Input group": "History",
+      "Mean RMSE increase": 0.02045071596835619,
+      "Shuffle standard deviation": 0.0053589183633431636
+    },
+    {
+      "Feature": "disability",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.013197905344608074,
+      "Shuffle standard deviation": 0.0059436510309939005
+    },
+    {
+      "Feature": "num_of_prev_attempts",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.012931733167265591,
+      "Shuffle standard deviation": 0.005171762790914658
+    },
+    {
+      "Feature": "age_band",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.005011336789700849,
+      "Shuffle standard deviation": 0.011747715925440659
+    },
+    {
+      "Feature": "studied_credits",
+      "Input group": "Context",
+      "Mean RMSE increase": 0.004516798224684493,
+      "Shuffle standard deviation": 0.014019159644887414
+    },
+    {
+      "Feature": "prior_max",
+      "Input group": "History",
+      "Mean RMSE increase": 0.004029664414182221,
+      "Shuffle standard deviation": 0.006594495363551691
+    },
+    {
+      "Feature": "gender",
+      "Input group": "Context",
+      "Mean RMSE increase": -0.005032204415075725,
+      "Shuffle standard deviation": 0.003677605391721942
+    }
+  ],
+  "grouped_feature_importance": [
+    {
+      "Feature group": "All historical inputs",
+      "Inputs": 9,
+      "Mean RMSE increase": 4.873718345251009,
+      "Shuffle standard deviation": 0.07788520220679454
+    },
+    {
+      "Feature group": "All contextual inputs",
+      "Inputs": 12,
+      "Mean RMSE increase": 3.4286178726095997,
+      "Shuffle standard deviation": 0.1319086643076481
+    }
+  ],
+  "importance_sample": {
+    "students": 500,
+    "rows": 3547,
+    "baseline_rmse": 14.762539811026745
+  },
+  "validation_pass": false,
+  "test_pass": false,
+  "uncertainty_pass": true,
+  "context_name": "XGBoost",
+  "history_name": "XGBoost",
+  "test_results": {
+    "Context reference": {
+      "R2": 0.1597758737845525,
+      "RMSE": 17.12823469234765,
+      "MAE": 13.083696475141657,
+      "RMSE reduction vs context (%)": 0.0,
+      "MAE reduction vs context (%)": 0.0
+    },
+    "History 28d": {
+      "R2": 0.35633598371502573,
+      "RMSE": 14.991484725339317,
+      "MAE": 10.998903162774335,
+      "RMSE reduction vs context (%)": 12.475015700029878,
+      "MAE reduction vs context (%)": 15.934283681437588
+    },
+    "History 56d": {
+      "R2": 0.3053971160707123,
+      "RMSE": 15.573395831317129,
+      "MAE": 11.550008757482761,
+      "RMSE reduction vs context (%)": 9.077636364506226,
+      "MAE reduction vs context (%)": 11.72212853281046
+    },
+    "Global mean": {
+      "R2": -5.014012973925119e-06,
+      "RMSE": 18.685990339165787,
+      "MAE": 14.348709940088218,
+      "RMSE reduction vs context (%)": -9.094665473693508,
+      "MAE reduction vs context (%)": -9.668624362771027
+    },
+    "Global median": {
+      "R2": -0.047422778203391136,
+      "RMSE": 19.123881251795222,
+      "MAE": 14.057292591934624,
+      "RMSE reduction vs context (%)": -11.651209802368978,
+      "MAE reduction vs context (%)": -7.4412924408843395
+    },
+    "Module/type mean": {
+      "R2": 0.1069969424421161,
+      "RMSE": 17.657999660694,
+      "MAE": 13.561521248447495,
+      "RMSE reduction vs context (%)": -3.0929338478940416,
+      "MAE reduction vs context (%)": -3.6520625055287637
+    },
+    "Module/type median": {
+      "R2": 0.0033886518037264945,
+      "RMSE": 18.654256548595697,
+      "MAE": 13.044116776218393,
+      "RMSE reduction vs context (%)": -8.909393662908084,
+      "MAE reduction vs context (%)": 0.30251159523964066
+    },
+    "Prior mean rule 28d": {
+      "R2": 0.046701530170891514,
+      "RMSE": 18.244395537939816,
+      "MAE": 13.400273237913567,
+      "RMSE reduction vs context (%)": -6.516496683051831,
+      "MAE reduction vs context (%)": -2.419627842738392
+    },
+    "Latest score rule 28d": {
+      "R2": -0.1458747844309638,
+      "RMSE": 20.002469300304465,
+      "MAE": 14.49126136776073,
+      "RMSE reduction vs context (%)": -16.780682070178155,
+      "MAE reduction vs context (%)": -10.75815917384948
+    }
+  },
+  "validation_results": {
+    "Context: XGBoost": {
+      "R2": 0.16686880640680257,
+      "RMSE": 17.050595578158177,
+      "MAE": 13.13002891808751,
+      "RMSE reduction (%)": 0.0,
+      "MAE reduction (%)": 0.0
+    },
+    "History 28d: XGBoost": {
+      "R2": 0.36400607362152193,
+      "RMSE": 14.897360932493086,
+      "MAE": 10.955180372832025,
+      "RMSE reduction (%)": 12.628501073730147,
+      "MAE reduction (%)": 16.563928067663902
+    },
+    "History 56d: XGBoost": {
+      "R2": 0.3192432571205669,
+      "RMSE": 15.412703780043621,
+      "MAE": 11.479124504583769,
+      "RMSE reduction (%)": 9.60606795584722,
+      "MAE reduction (%)": 12.57350173257812
+    }
+  },
+  "context_candidates": {
+    "XGBoost": {
+      "Train R2": 0.19786316334202925,
+      "Train RMSE": 16.789456156929607,
+      "Train MAE": 12.923809172844148,
+      "Validation R2": 0.16686880640680257,
+      "Validation RMSE": 17.050595578158177,
+      "Validation MAE": 13.13002891808751
+    },
+    "Random Forest": {
+      "Train R2": 0.2648278970380009,
+      "Train RMSE": 16.073368727515973,
+      "Train MAE": 12.264737917557678,
+      "Validation R2": 0.15597057977636308,
+      "Validation RMSE": 17.16175304923922,
+      "Validation MAE": 13.200585581431733
+    },
+    "Decision Tree": {
+      "Train R2": 0.16292823066256323,
+      "Train RMSE": 17.1511697751244,
+      "Train MAE": 13.207978498138543,
+      "Validation R2": 0.13889757774267564,
+      "Validation RMSE": 17.334457770618243,
+      "Validation MAE": 13.354051748665396
+    },
+    "K-Neighbors Regressor": {
+      "Train R2": 0.21591569161450497,
+      "Train RMSE": 16.599453095526346,
+      "Train MAE": 12.600995319477423,
+      "Validation R2": 0.12214226864967614,
+      "Validation RMSE": 17.502291995264823,
+      "Validation MAE": 13.401431832709342
+    },
+    "Module/type mean": {
+      "Train R2": 0.11251818812009617,
+      "Train RMSE": 17.660058135852996,
+      "Train MAE": 13.636763328487358,
+      "Validation R2": 0.10834151650412072,
+      "Validation RMSE": 17.639331772223485,
+      "Validation MAE": 13.622144583657123
+    },
+    "Linear Regression": {
+      "Train R2": 0.10539715003219707,
+      "Train RMSE": 17.73076757780222,
+      "Train MAE": 13.628806361779597,
+      "Validation R2": 0.09945915413302375,
+      "Validation RMSE": 17.72697220696537,
+      "Validation MAE": 13.64141976051762
+    },
+    "Module/type median": {
+      "Train R2": 0.012347194397483885,
+      "Train RMSE": 18.630072677517692,
+      "Train MAE": 13.112909057153187,
+      "Validation R2": 0.017053866383552108,
+      "Validation RMSE": 18.52028711745846,
+      "Validation MAE": 13.0120536937266
+    },
+    "Global mean": {
+      "Train R2": 0.0,
+      "Train RMSE": 18.746163401093067,
+      "Train MAE": 14.480574667452547,
+      "Validation R2": -4.515153275574946e-05,
+      "Validation RMSE": 18.680679101308414,
+      "Validation MAE": 14.442018510272439
+    },
+    "Global median": {
+      "Train R2": -0.04685636807397309,
+      "Train RMSE": 19.18032438490794,
+      "Train MAE": 14.18308758146943,
+      "Validation R2": -0.04431342254669257,
+      "Validation RMSE": 19.08966406461302,
+      "Validation MAE": 14.123367728974523
+    }
+  },
+  "history_candidates": {
+    "XGBoost": {
+      "Train R2": 0.4296016052723646,
+      "Train RMSE": 14.157988184157512,
+      "Train MAE": 10.42394738138665,
+      "Validation R2": 0.36400607362152193,
+      "Validation RMSE": 14.897360932493086,
+      "Validation MAE": 10.955180372832025
+    },
+    "Random Forest": {
+      "Train R2": 0.45535348515981944,
+      "Train RMSE": 13.834700530081571,
+      "Train MAE": 10.070466868960686,
+      "Validation R2": 0.3570926979407322,
+      "Validation RMSE": 14.978110666366597,
+      "Validation MAE": 10.998418110520259
+    },
+    "K-Neighbors Regressor": {
+      "Train R2": 0.3678380834060275,
+      "Train RMSE": 14.904814068556421,
+      "Train MAE": 10.965660598598774,
+      "Validation R2": 0.3277515359485258,
+      "Validation RMSE": 15.316084903197016,
+      "Validation MAE": 11.289293519617692
+    },
+    "Decision Tree": {
+      "Train R2": 0.39908676809866706,
+      "Train RMSE": 14.531762180517687,
+      "Train MAE": 10.630097400540432,
+      "Validation R2": 0.31282295732257737,
+      "Validation RMSE": 15.485212764731271,
+      "Validation MAE": 11.405482514612935
+    },
+    "Linear Regression": {
+      "Train R2": 0.24749372712287632,
+      "Train RMSE": 16.26175675340687,
+      "Train MAE": 12.199794308357674,
+      "Validation R2": 0.23981468700055708,
+      "Validation RMSE": 16.287056133021053,
+      "Validation MAE": 12.212535386176725
+    },
+    "Prior mean rule": {
+      "Train R2": 0.06833953014466843,
+      "Train RMSE": 18.094276922947838,
+      "Train MAE": 13.31289901223823,
+      "Validation R2": 0.05307070296541583,
+      "Validation RMSE": 18.17781304720339,
+      "Validation MAE": 13.309984141585813
+    },
+    "Latest score rule": {
+      "Train R2": -0.1052574512793969,
+      "Train RMSE": 19.70807126222365,
+      "Train MAE": 14.315921128388037,
+      "Validation R2": -0.1230884216880006,
+      "Validation RMSE": 19.79656457211679,
+      "Validation MAE": 14.364653347419294
+    }
+  },
+  "subgroups": {
+    "No prior score": {
+      "rows": 8665.0,
+      "R2": 0.11783229637737447,
+      "RMSE": 18.573329465570506,
+      "MAE": 13.638828999144591
+    },
+    "Prior score available": {
+      "rows": 25109.0,
+      "R2": 0.44735285529115687,
+      "RMSE": 13.537203661429514,
+      "MAE": 10.087876942210064
+    }
+  },
+  "uncertainty": [
+    {
+      "Model": "History 28d",
+      "Metric": "RMSE",
+      "Reduction (%)": 12.475015700029878,
+      "95% lower (%)": 11.730468685491765,
+      "95% upper (%)": 13.19548835284541
+    },
+    {
+      "Model": "History 28d",
+      "Metric": "MAE",
+      "Reduction (%)": 15.934283681437588,
+      "95% lower (%)": 15.129223737799236,
+      "95% upper (%)": 16.753748409137952
+    },
+    {
+      "Model": "History 56d",
+      "Metric": "RMSE",
+      "Reduction (%)": 9.077636364506226,
+      "95% lower (%)": 8.398058963341342,
+      "95% upper (%)": 9.727498280726069
+    },
+    {
+      "Model": "History 56d",
+      "Metric": "MAE",
+      "Reduction (%)": 11.72212853281046,
+      "95% lower (%)": 10.9863798705167,
+      "95% upper (%)": 12.440074935260794
+    }
+  ],
+  "test_rows": 33774,
+  "test_history_coverage_28d": 0.7434417007165275,
+  "test_history_coverage_56d": 0.6569550541836916,
+  "cleaned_data_sha256": "f6019c12b1a91ef5618d14dd38a17c34eefc99aadfcaed0fe8e1156f30227878"
+}
