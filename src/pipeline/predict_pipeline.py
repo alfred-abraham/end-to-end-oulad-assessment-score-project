@@ -1,6 +1,5 @@
 """Validated OULAD inputs and inference through one saved sklearn pipeline."""
 from functools import lru_cache
-import importlib.metadata
 import json
 import math
 from pathlib import Path
@@ -10,7 +9,7 @@ import pandas as pd
 
 from src.config import ARTIFACT_DIR, FEATURE_COLUMNS, METADATA_FILENAME, MODEL_FILENAME
 from src.features import features_from_records
-from src.utils import file_sha256, load_object
+from src.utils import file_sha256, load_object, package_version
 
 MAX_HISTORY_ROWS = 50
 
@@ -105,8 +104,8 @@ class PredictPipeline:
                 raise ValueError('Unsupported feature schema')
             if self.metadata['model_sha256'] != file_sha256(model_path):
                 raise ValueError('Model and metadata do not match')
-            for package in self.metadata['versions']:
-                if importlib.metadata.version(package) != self.metadata['versions'][package]:
+            for package, expected_version in self.metadata['versions'].items():
+                if package_version(package) != expected_version:
                     raise ValueError(f'{package} differs from the training environment')
             self.model = load_object(model_path)
             if list(self.model.feature_names_in_) != FEATURE_COLUMNS:

@@ -1,8 +1,17 @@
 """Persist local, trusted model artifacts atomically."""
 import hashlib
+from importlib.metadata import version
 import json
 from pathlib import Path
 import joblib
+
+
+def package_version(name):
+    if name == 'xgboost':
+        # Both XGBoost distributions provide this module and version.
+        from xgboost import __version__
+        return __version__
+    return version(name)
 
 
 def file_sha256(path):

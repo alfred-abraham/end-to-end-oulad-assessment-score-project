@@ -1,7 +1,6 @@
 """Run with: python -m src.pipeline.train_pipeline"""
 import argparse
 from datetime import datetime, timezone
-import importlib.metadata
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +11,7 @@ from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 from src.config import (ARTIFACT_DIR, DATA_DIR, FEATURE_COLUMNS, MODEL_FILENAME,
                         METADATA_FILENAME, SCORE_RELEASE_LAG, SEED)
-from src.utils import file_sha256, save_json, save_object
+from src.utils import file_sha256, package_version, save_json, save_object
 
 
 def make_catalog(data_dir):
@@ -55,7 +54,7 @@ def train(data_dir=DATA_DIR, artifact_dir=ARTIFACT_DIR, tune=False):
             'students': int(frame.loc[idx, 'id_student'].nunique())}
             for name, idx in partitions.items()},
         'excluded_unknown_deadline_rows': int(data.date.isna().sum()),
-        'versions': {name: importlib.metadata.version(name)
+        'versions': {name: package_version(name)
                      for name in ['numpy', 'pandas', 'scikit-learn', 'joblib', 'xgboost']},
         'cleaned_data_sha256': file_sha256(Path(data_dir) / 'combinedfile_cleaned.csv'),
         'availability_note': 'Grade-release timestamps are absent. Assume availability '
